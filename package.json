@@ -1,0 +1,23 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "An app to show weather data in different regions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maybeabhishek/IWP-Weather-App.git"
+  },
+  "author": "Abhishek and Shreyansh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maybeabhishek/IWP-Weather-App/issues"
+  },
+  "homepage": "https://github.com/maybeabhishek/IWP-Weather-App#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}

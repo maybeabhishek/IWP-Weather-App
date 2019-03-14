@@ -1,0 +1,16 @@
+.landing .imageMap {
+  border: 1px solid red;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing .leftCol, .landing .rightCol {
+  border: 1px solid red;
+}
+
+.landing .popularCities ul li {
+  list-style: none;
+  margin-left: -40px;
+}
+/*# sourceMappingURL=home.css.map */

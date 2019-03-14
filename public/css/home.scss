@@ -1,0 +1,21 @@
+.landing {
+  .imageMap {
+    border: 1px solid red;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .leftCol, .rightCol{
+    border: 1px solid red;
+  }
+
+  .popularCities{
+    ul{
+      li{
+        list-style: none;
+        margin-left: -40px;
+      }
+    }
+  }
+}

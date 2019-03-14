@@ -1,9 +1,8 @@
 
 
-var app = require("express")();
-var router = app.router();
+var router = require("express").Router();
 
-router.get("/",function(req, res){
+router.get("/", function (req, res) {
 	res.render("index.ejs");
 });
 

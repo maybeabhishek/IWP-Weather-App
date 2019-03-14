@@ -8,17 +8,59 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
 	<!-- <script src="main.js"></script> -->
-	<link rel="stylesheet" type="text/css" media="screen"
-		href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+	<link rel="stylesheet" href="/lib/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="/css/home.css" type="text/css">
+
+
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/lib/bootstrap.js"></script>
 </head>
 
 <body>
+	<% include partials/navbar %>
 	<div class="container">
 		<h1>Weather App</h1>
+		<div class="row landing">
+			<div class="col-3 leftCol">
+				<div class="container mt-4 popularCities">
+					<h3>Popular Cities</h3>
+					<ul>
+						<li><a href="#">Mumbai</a></li>
+						<li><a href="#">Delhi</a></li>
+						<li><a href="#">Bangalore</a></li>
+						<li><a href="#">Hyderabad</a></li>
+						<li><a href="#">Ahmedabad</a></li>
+						<li><a href="#">Chennai</a></li>
+						<li><a href="#">Kolkata</a></li>
+						<li><a href="#">Surat</a></li>
+						<li><a href="#">Pune</a></li>
+						<li><a href="#">Jaipur</a></li>
+						<li><a href="#">Lucknow</a></li>
+						<li><a href="#">Kanpur</a></li>
+						<li><a href="#">Nagpur</a></li>
+						<li><a href="#">Visakhapatnam</a></li>
+						<li><a href="#">Indore</a></li>
+						<li><a href="#">Thane</a></li>
+						<li><a href="#">Bhopal</a></li>
+						<li><a href="#">Pimpri-Chinchwad</a></li>
+						<li><a href="#">Patna</a></li>
+						<li><a href="#">Vadodara</a></li>
+						<li><a href="#">Ghaziabad</a></li>
+						<li><a href="#">Ludhiana</a></li>
+						<li><a href="#">Coimbatore</a></li>
+						<li><a href="#">Agra</a></li>
+						<li><a href="#">Madurai</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="imageMap col-6">
+				<% include partials/imagemap %>
+			</div>
+			<div class="col-3 rightCol"></div>
+		</div>
 	</div>
-	<% include partials/imagemap %>
 </body>
 
 </html>

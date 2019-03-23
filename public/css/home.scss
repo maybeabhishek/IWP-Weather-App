@@ -6,16 +6,34 @@
     margin-right: auto;
   }
 
-  .leftCol, .rightCol{
+  .leftCol,
+  .rightCol {
     border: 1px solid red;
   }
 
-  .popularCities{
-    ul{
-      li{
+  .popularCities {
+    ul {
+      li {
         list-style: none;
         margin-left: -40px;
       }
+    }
+  }
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  .map {
+    height: 70%;
+    width: 40vw;
+    margin: auto 20vw;
+
+    #map {
+      height: 100%;
     }
   }
 }

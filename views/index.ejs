@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
 
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Page Title</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
-	<!-- <script src="main.js"></script> -->
+    <link rel="stylesheet" href="/lib/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/css/home.css" type="text/css" />
 
+    <script src="/lib/jquery.min.js"></script>
+    <script src="/lib/bootstrap.js"></script>
+  </head>
 
-	<link rel="stylesheet" href="/lib/bootstrap.css" type="text/css">
-	<link rel="stylesheet" href="/css/home.css" type="text/css">
-
-
-	<script src="/lib/jquery.min.js"></script>
-	<script src="/lib/bootstrap.js"></script>
-</head>
-
-<body>
-	<% include partials/navbar %>
-	<div class="container">
+  <body>
+    <% include partials/navbar %>
+    <!-- <div class="container">
 		<h1>Weather App</h1>
 		<div class="row landing">
 			<div class="col-3 leftCol">
@@ -60,7 +57,17 @@
 			</div>
 			<div class="col-3 rightCol"></div>
 		</div>
-	</div>
-</body>
+	</div> -->
 
+    <div class="map">
+      <div id="map"></div>
+    </div>
+
+    <script src="/js/getMap.js"></script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBU634U6QBof7xEL5YKArhN6_KmwwhQUTk&callback=initMap"
+    ></script>
+  </body>
 </html>

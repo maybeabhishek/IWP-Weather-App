@@ -5,12 +5,32 @@
   margin-right: auto;
 }
 
-.landing .leftCol, .landing .rightCol {
+.landing .leftCol,
+.landing .rightCol {
   border: 1px solid red;
 }
 
 .landing .popularCities ul li {
   list-style: none;
   margin-left: -40px;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html .map,
+body .map {
+  height: 70%;
+  width: 40vw;
+  margin: auto 20vw;
+}
+
+html .map #map,
+body .map #map {
+  height: 100%;
 }
 /*# sourceMappingURL=home.css.map */

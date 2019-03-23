@@ -18,6 +18,8 @@
   "homepage": "https://github.com/maybeabhishek/IWP-Weather-App#readme",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "request": "^2.88.0"
   }
 }

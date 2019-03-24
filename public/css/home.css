@@ -1,20 +1,4 @@
-.landing .imageMap {
-  border: 1px solid red;
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.landing .leftCol,
-.landing .rightCol {
-  border: 1px solid red;
-}
-
-.landing .popularCities ul li {
-  list-style: none;
-  margin-left: -40px;
-}
-
+@import url("https://fonts.googleapis.com/css?family=Lato");
 html,
 body {
   height: 100%;
@@ -24,25 +8,61 @@ body {
   overflow-x: hidden;
   background: #02aab0;
   /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #00cdac, #02aab0);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, right top, from(#00cdac), to(#02aab0));
-  background: linear-gradient(to right, #00cdac, #02aab0);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-html .container .row,
-body .container .row {
+html .landing,
+body .landing {
+  height: 100vh;
+  background-image: url("/images/landingBack1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+html .landing .landing-text,
+body .landing .landing-text {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+html .landing .landing-text h1,
+body .landing .landing-text h1 {
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5), 0px 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+html .landing .landing-text p,
+body .landing .landing-text p {
+  font-variant-caps: small-caps;
+  word-spacing: 5px;
+  font-size: 1.2rem;
+}
+
+html .landing .landing-text hr,
+body .landing .landing-text hr {
+  border-top: 1px solid black;
+  width: 50vw;
+}
+
+html .container .map-container,
+body .container .map-container {
   height: 80%;
 }
 
-html .container .row .map,
-body .container .row .map {
-  border: 5px solid red;
+html .container .map-container .map,
+body .container .map-container .map {
   height: 80vh;
 }
 
-html .container .row .map #map,
-body .container .row .map #map {
+html .container .map-container .map #map,
+body .container .map-container .map #map {
   height: 100%;
 }
 
@@ -50,7 +70,5 @@ body .container .row .map #map {
   width: 100vw;
   height: 10px;
   background-color: white;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 /*# sourceMappingURL=home.css.map */

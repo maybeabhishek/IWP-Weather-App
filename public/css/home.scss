@@ -40,14 +40,12 @@ background: linear-gradient(to right, #00CDAC, #02AAB0); /* W3C, IE 10+/ Edge, F
       height: 80%;
 
       .map {
-
+				width:100%;
+				border: 1px solid red;
         // height: 60%;
         // width: 20vw;
         // margin: auto 20vw;
         // border: 1px solid red;
-        #map {
-          height: 100%;
-        }
       }
     }
   }

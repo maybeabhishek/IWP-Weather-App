@@ -1,0 +1,144 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css");
+.card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+}
+
+#card {
+  -webkit-box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
+          box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  width: 80%;
+  padding: 0;
+  min-height: 60vh;
+  margin: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+#card .details {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  color: #888;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-transition: color 2s ease;
+  transition: color 2s ease;
+}
+
+.thunder #card .details {
+  color: #ddd;
+}
+
+#card .details .right {
+  text-align: right;
+}
+
+#card .details #date {
+  margin: 4px 0;
+}
+
+#card .details #summary {
+  font-weight: 600;
+  font-size: 22px;
+}
+
+#card .details .temp {
+  font-size: 60px;
+  line-height: 60px;
+}
+
+#card .details .temp span {
+  font-size: 18px;
+  line-height: 30px;
+  vertical-align: top;
+  margin-left: 5px;
+}
+
+.widget {
+  background-color: #dae3fd;
+  -webkit-transition: background-color 2s ease;
+  transition: background-color 2s ease;
+}
+
+.thunder .widget {
+  background-color: #9fa4ad;
+}
+
+.rain .widget {
+  background-color: #d8d8d8;
+}
+
+.sun .widget {
+  background-color: #ccccff;
+}
+
+.widget #inner {
+  background-color: white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0)));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+}
+
+.widget .cloud {
+  -webkit-transition: fill 2s ease;
+  transition: fill 2s ease;
+}
+
+.widget #cloud1 {
+  fill: #efefef;
+}
+
+.thunder .widget #cloud1 {
+  fill: #9fa4ad;
+}
+
+.widget #cloud2 {
+  fill: #e6e6e6;
+}
+
+.thunder .widget #cloud2 {
+  fill: #8b8e98;
+}
+
+.widget #cloud3 {
+  fill: #d5d5d5;
+}
+
+.thunder .widget #cloud3 {
+  fill: #7b7988;
+}
+
+#outer,
+#back {
+  position: fixed;
+  pointer-events: none;
+}
+/*# sourceMappingURL=widget.css.map */

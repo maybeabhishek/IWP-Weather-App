@@ -1,0 +1,143 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css");
+
+//weather widget
+
+$speed: 2s;
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  position: relative;
+
+  // background: #eee;
+  // background: linear-gradient(240deg, rgba(150, 50, 50, 0.3) , rgba(0, 0, 200, 0) );
+
+  &.cloud {
+    //background: linear-gradient(360deg, rgba(50, 50, 50, 0.5) , rgba(0, 0, 200, 0) );
+  }
+
+  &.wind {
+  }
+}
+
+#card {
+  //background: #fff;
+  box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  // width: 300px;
+  width: 80%;
+  padding: 0;
+  min-height: 60vh;
+  // max-height: 1% !important;
+  margin: 20px;
+  border-radius: 5px;
+  //border: solid 0px #fff;
+  position: relative;
+
+  .details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 20px;
+    color: #888;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    transition: color $speed ease;
+
+    .thunder & {
+      color: #ddd;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    #date {
+      margin: 4px 0;
+    }
+
+    #summary {
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .temp {
+      font-size: 60px;
+      line-height: 60px;
+
+      span {
+        font-size: 18px;
+        line-height: 30px;
+        vertical-align: top;
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.widget {
+  background-color: #dae3fd;
+  transition: background-color $speed ease;
+
+  .thunder & {
+    background-color: #9fa4ad;
+  }
+
+  .rain & {
+    background-color: #d8d8d8;
+  }
+
+  .sun & {
+    background-color: #ccccff;
+  }
+
+  #inner {
+    background-color: rgba(255, 255, 255, 1);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .cloud {
+    transition: fill $speed ease;
+  }
+
+  #cloud1 {
+    fill: #efefef;
+
+    .thunder & {
+      fill: #9fa4ad;
+    }
+  }
+
+  #cloud2 {
+    fill: #e6e6e6;
+
+    .thunder & {
+      fill: #8b8e98;
+    }
+  }
+
+  #cloud3 {
+    fill: #d5d5d5;
+
+    .thunder & {
+      fill: #7b7988;
+    }
+  }
+}
+
+#outer,
+#back {
+  position: fixed;
+  pointer-events: none;
+}

@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 from datetime import datetime, timedelta
 import time
@@ -12,14 +7,8 @@ import requests
 import matplotlib.pyplot as plt
 
 
-# In[2]:
-
-
-API_KEY = 'Insert API Key Here'
+API_KEY = '7b5a0c2e6087b43e'
 BASE_URL = "http://api.wunderground.com/api/{}/history_{}/q/26.9124,75.7873.json" #latitude and longitude of jaipur
-
-
-# In[3]:
 
 
 target_date = datetime(2018, 3, 12)
@@ -27,8 +16,6 @@ features = ["date", "meantempm", "meandewptm", "meanpressurem", "maxhumidity", "
             "mintempm", "maxdewptm", "mindewptm", "maxpressurem", "minpressurem", "precipm"]
 DailySummary = namedtuple("DailySummary", features) # date to be change after the getting the exact 500 dataset to increase further
 
-
-# In[4]:
 
 
 def extract_weather_data(url, api_key, target_date, days):
@@ -56,9 +43,6 @@ def extract_weather_data(url, api_key, target_date, days):
         time.sleep(6)
         target_date += timedelta(days=1)
     return records
-
-
-# In[10]:
 
 
 records = extract_weather_data(BASE_URL, API_KEY, target_date, 10)

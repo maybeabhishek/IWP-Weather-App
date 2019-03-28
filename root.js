@@ -22,6 +22,7 @@ router.post("/register/user", function (req, res) {
 		
 })
 
-
-
+router.get("/prediction", function(req, res){
+	res.render("prediction.ejs");
+});
 module.exports = router;

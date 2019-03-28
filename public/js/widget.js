@@ -93,7 +93,7 @@ function init()
 {
 	onResize();
 	
-	// 🖱 bind weather menu buttons
+	// // 🖱 bind weather menu buttons
 	
 	for(var i = 0; i < weather.length; i++)
 	{
@@ -155,16 +155,7 @@ function onResize()
 
 function drawCloud(cloud, i)
 {
-	/* 
-	
-	☁️ We want to create a shape thats loopable but that can also
-	be animated in and out. So we use Snap SVG to draw a shape
-	with 4 sections. The 2 ends and 2 arches the same width as
-	the card. So the final shape is about 4 x the width of the
-	card.
-	
-	*/
-	
+
 	var space  = settings.cloudSpace * i;
 	var height = space + settings.cloudHeight;
 	var arch = height + settings.cloudArch + (Math.random() * settings.cloudArch);

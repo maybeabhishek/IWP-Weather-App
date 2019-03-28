@@ -26,8 +26,10 @@ function fullDay(str) {
   }
 }
 
+
+// Main function
 $(function() {
-  
+  // All parts
   var $wrapper = $('.wrapper'),
     $panel = $wrapper.find('.panel'),
     $city = $panel.find('#city'),
@@ -48,6 +50,7 @@ $(function() {
     $form = $search.find('form'),
     $button = $form.find('#button');
 
+  // use ipapi to get weather of 8.8.8.8
   $.ajax({
       dataType: 'json',
       url: 'https://ipapi.co/8.8.8.8/json/'
@@ -58,49 +61,53 @@ $(function() {
       getWeather(yourLocation);
     });
 
+  // Function go get weather details from openweather
   function getWeather(input) {
-
     var appid = '58b6f7c78582bffab3936dac99c31b25';
+    // Current Weather
     var requestWeather = $.ajax({
       dataType: 'json',
       url: '//api.openweathermap.org/data/2.5/weather',
       data: {
         q: input,
-        units: 'imperial',
+        units: 'metric',
         appid: appid
       }
     });
+
+    // Daily forecast
     var requestForecast = $.ajax({
       dataType: 'json',
       url: '//api.openweathermap.org/data/2.5/forecast/daily',
       data: {
         q: input,
-        units: 'imperial',
+        units: 'metric',
         cnt: '6',
         appid: appid
       }
     });
 
-    $fahrenheit.addClass('active').removeAttr('href');
-    $celsius.removeClass('active').attr("href", '#');
+    // Change classes
+    $celsius.addClass('active').removeAttr('href');
+    $fahrenheit.removeClass('active').attr("href", '#');
     $icon.removeClass();
     $button.removeClass().addClass('button transparent');
 
+    // Query is taken
     requestWeather.done(function(data) {
+      console.log("Forecast: ", data);
 
       var weather = document.getElementById('weather');
-      if (data.cod === '404') {
+      if (data.code === '404') {
         $city.html('city not found');
-        setBackground('color404', 'button404');
         weather.style.display = 'none';
       } else weather.style.display = '';
 
+      // Get date and convert it
       var dt = new Date(data.dt * 1000).toString().split(' ');
-
-      var title = data.sys.country
-        ? data.name + ', ' + data.sys.country
-        : data.name;
-
+      var title = data.sys.country? data.name + ', ' + data.sys.country: data.name;
+      
+      // Get data from api
       $city.html(title);
       $tempNumber.html(Math.round(data.main.temp));
       $description.html(titleCase(data.weather[0].description));
@@ -108,6 +115,7 @@ $(function() {
       $humidity.html('Humidity ' + data.main.humidity + '%');
       $dt.html(fullDay(dt[0]) + ' ' + dt[4].substring(0, 5));
 
+      // Events
       $celsius.on('click', toCelsius);
       $fahrenheit.on('click', toFahrenheit);
 
@@ -123,20 +131,8 @@ $(function() {
         $tempNumber.html(Math.round(data.main.temp));
       }
 
-      function setBackground(background, button) {
-        $('body').removeClass().addClass(background);
-        $button.off().hover(function() {
-          $(this).removeClass('transparent').addClass(button);
-        }, function() {
-          $(this).removeClass().addClass('button transparent');
-        });
-      }
-
-      if (data.main.temp >= 80) setBackground('hot', 'button-hot');
-      else if (data.main.temp >= 70) setBackground('warm', 'button-warm');
-      else if (data.main.temp >= 60) setBackground('cool', 'button-cool');
-      else setBackground('cold', 'button-cold');
-
+      // https://openweathermap.org/weather-conditions
+      // https://erikflowers.github.io/weather-icons/
       switch (data.weather[0].icon) {
         case '01d':
           $icon.addClass('wi wi-day-sunny');
@@ -177,13 +173,16 @@ $(function() {
       }
     });
 
-    requestForecast.done(function(data) {
 
+    // Forecast is taken
+    requestForecast.done(function(data) {
+      // Events
       $celsius.on('click', toCelsius);
       $fahrenheit.on('click', toFahrenheit);
 
       var forecast = [];
       var length = data.list.length;
+      // Store all forecasts
       for (var i = 1; i < length; i++) {
         forecast.push({
           date: new Date(data.list[i].dt * 1000).toString().split(' ')[0],
@@ -206,6 +205,7 @@ $(function() {
         doForecast('fahrenheit');
       }
 
+      // Show all forecasts
       function doForecast(unit) {
         var arr = [];
         var length = forecast.length;
@@ -219,6 +219,7 @@ $(function() {
     });
   }
 
+  // When city is submitted
   $form.submit(function(event) {
     var input = document.getElementById('search').value;
     var inputLength = input.length;

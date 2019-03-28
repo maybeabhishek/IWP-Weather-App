@@ -1,0 +1,20 @@
+h1 {
+  text-align: center;
+}
+
+.form-container {
+  margin: 10vh auto;
+}
+
+.form-container .form-group {
+  margin: auto 380px;
+}
+
+.form-container .form-group .form-control {
+  width: 20vw;
+}
+
+.form-container .text {
+  margin: auto 380px;
+}
+/*# sourceMappingURL=login.css.map */

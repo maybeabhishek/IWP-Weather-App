@@ -4,7 +4,8 @@
   "description": "An app to show weather data in different regions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,17 @@
   },
   "homepage": "https://github.com/maybeabhishek/IWP-Weather-App#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.20",
+    "nodemon": "^1.18.10",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1"
   }
 }

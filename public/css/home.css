@@ -51,18 +51,13 @@ body .landing .landing-text hr {
   width: 50vw;
 }
 
-html .container .map-container,
-body .container .map-container {
+html .container .row-container,
+body .container .row-container {
   height: 80%;
 }
 
-html .container .map-container .map,
-body .container .map-container .map {
-  height: 80vh;
-}
-
-html .container .map-container .map #map,
-body .container .map-container .map #map {
+html .container .row-container .map,
+body .container .row-container .map {
   height: 100%;
 }
 

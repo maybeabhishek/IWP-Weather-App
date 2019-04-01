@@ -1,0 +1,16 @@
+h1{
+    text-align: center;
+}
+
+.form-container{
+    margin: 10vh auto;
+    .form-group{
+        margin: auto 380px;
+        .form-control{
+            width: 20vw;
+        }
+    }
+    .text{
+        margin: auto 380px;
+    }
+}

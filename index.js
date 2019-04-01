@@ -2,9 +2,12 @@
 // Imports
 // =======
 var express = require("express");
-var app = express();
-
+const bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+var session = require('express-session');
 var rootRoute = require('./root.js');
+
+var app = express();
 
 // =================
 // App configuration
@@ -12,10 +15,32 @@ var rootRoute = require('./root.js');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
+//connect to mongo db
+mongoose.connect('mongodb://localhost/weather'); 
+var db = mongoose.connection;
+
+//handle mongo error
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log("connected");
+});
+
+app.use(function (req, res, next) {
+  res.locals = {
+    loggedIn: false,
+    user: undefined
+  };
+  next();
+});
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 // Routes
 app.use(rootRoute);
 
-app.listen(process.env.PORT || 3000, process.env.IP, function(){
+app.listen(process.env.PORT || 3004, process.env.IP, function(){
 	console.log("Server is running");
 });

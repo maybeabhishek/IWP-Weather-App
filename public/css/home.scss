@@ -43,17 +43,14 @@ body {
   }
 
   .container {
-    .map-container {
+    .row-container {
       height: 80%;
 
       .map {
         // border: 5px solid red;
-        height: 80vh;
+        height: 100%;
         // margin: auto 20vw;
-        // border: 1px solid red;
-        #map {
-          height: 100%;
-        }
+				// border: 1px solid red;
       }
     }
   }

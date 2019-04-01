@@ -34,6 +34,6 @@ app.use(bodyParser.json());
 // Routes
 app.use(rootRoute);
 
-app.listen(process.env.PORT || 3000, process.env.IP, function(){
+app.listen(process.env.PORT || 3004, process.env.IP, function(){
 	console.log("Server is running");
 });

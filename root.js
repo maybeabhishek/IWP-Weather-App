@@ -19,7 +19,16 @@ router.post("/register/user", function (req, res) {
 			user: req.body.user.username,
 			password: req.body.user.password,
 		}
+		User.create(userData,function(err,user){
+			if(err) return next(err);
+			else	return res.redirect('/profile');
+
+		});
 		
+})
+
+router.get("/profile", function(req,res){
+	res.render("profile.ejs");
 })
 
 router.get("/prediction", function(req, res){

@@ -1,6 +1,8 @@
 var router = require("express").Router();
 var User = require('./models/user');
 
+
+
 router.get("/", function (req, res) {
 	res.render("index.ejs");
 });
@@ -14,24 +16,26 @@ router.get("/register", function (req, res) {
 })
 
 router.post("/register/user", function (req, res) {
-		var userData = {
-			email: req.body.user.email,
-			user: req.body.user.username,
-			password: req.body.user.password,
-		}
-		User.create(userData,function(err,user){
-			if(err) return next(err);
-			else	return res.redirect('/profile');
+	var userData = {
+		email: req.body.email,
+		user: req.body.username,
+		password: req.body.pass,
+	}
+	res.locals['loggedIn'] = true;
+	res.locals['user'] = req.body.username;
+	User.create(userData, function (err, user) {
+		console.log(user)
+		if (err){ console.log(err);}
+		else return res.redirect('/');
+	});
 
-		});
-		
 })
 
-router.get("/profile", function(req,res){
+router.get("/profile", function (req, res) {
 	res.render("profile.ejs");
 })
 
-router.get("/prediction", function(req, res){
+router.get("/prediction", function (req, res) {
 	res.render("prediction.ejs");
 });
 module.exports = router;

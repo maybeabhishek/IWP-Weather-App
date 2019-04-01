@@ -25,6 +25,13 @@ db.once('open', function () {
   console.log("connected");
 });
 
+app.use(function (req, res, next) {
+  res.locals = {
+    loggedIn: false,
+    user: undefined
+  };
+  next();
+});
 
 app.use(bodyParser.urlencoded({
     extended: true

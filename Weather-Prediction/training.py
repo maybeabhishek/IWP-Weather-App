@@ -7,9 +7,36 @@ from sklearn.metrics import explained_variance_score,     mean_absolute_error,  
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
-from preprocessing import getXY_transformed
 from model import createModel
+
+def getXY_transformed():
+  df = pd.read_csv('~/Documents/webProjects/IWP-Weather-App/Weather-Prediction/JaipurFinalCleanData.csv').set_index('date')
+
+  # Drop the original columns
+  df = df.drop(['mintempm', 'maxtempm'], axis=1)
+
+  # Set X and y columns
+  X = df[[col for col in df.columns if col != 'meantempm']]
+  y = df['meantempm']
+  X = X.values
+  y = y.values.reshape(-1,1)
+  minMaxScalerX = MinMaxScaler()
+  minMaxScalerY = MinMaxScaler()
+  X = minMaxScalerX.fit_transform(X)
+  return X, y
+
+def createModel():
+	model = tf.keras.Sequential()
+	model.add(tf.keras.layers.Dense(36, input_dim=36, kernel_initializer='normal', activation=tf.nn.relu))
+	model.add(tf.keras.layers.Dense(20, activation='relu'))
+	model.add(tf.keras.layers.Dense(20, activation='relu'))
+	model.add(tf.keras.layers.Dense(1))
+	optimizer = tf.keras.optimizers.RMSprop(0.001)
+
+	model.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
+	return model
 
 
 checkpointPath = "./checkpoint/model.ckpt"

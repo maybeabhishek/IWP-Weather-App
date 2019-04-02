@@ -10,37 +10,54 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
 from model import createModel
-import pickle
-
-
-# tf.enable_eager_execution()
 
 def getXY_transformed():
 	df = pd.read_csv('~/Documents/webProjects/IWP-Weather-App/Weather-Prediction/JaipurFinalCleanData.csv').set_index('date')
 
 	# Drop the original columns
 	df = df.drop(['mintempm', 'maxtempm'], axis=1)
+	corr = df.corr()
+	print("===========================")
+	print("Correlation of all columns:")
+	print("===========================")
+	print(corr['meantempm'], end='\n\n')
+	plt.matshow(df.corr())
+	plt.show()
+	print("===============")
+	print("Columns to drop")
+	print("===============")
+	dropped = []
+	# 	Testing set Mean Abs Error:  1.35
+	#   Testing set Mean Sq Error:  3.33
+	
+	# Check correlation and drop columns which are not that useful to final output
+	for cols in df.columns:
+		if abs(corr['meantempm'][cols]) < 0.5:
+			print('Dropping: ', cols)
+			dropped.append(cols)
+			# df = df.drop(cols, axis=1)
+			print(df[cols])
+			df[cols]=0
+
+	with open("cityDropColumns.dat", "a") as file:
+		row = "jaipur,"+",".join(dropped)+"\n"
+		file.write(row)
+	# Testing set Mean Abs Error:  1.18
+	# Testing set Mean Sq Error:  2.59
+	print("Description of data...")
+	print(df.describe(), end='\n\n\n')
+
 
 	# Set X and y columns
 	X = df[[col for col in df.columns if col != 'meantempm']]
 	y = df['meantempm']
-	X = X.values
+	
+	print("X SHAPE:", X.shape)
 	y = y.values.reshape(-1,1)
 	minMaxScalerX = MinMaxScaler()
 	minMaxScalerY = MinMaxScaler()
 	X = minMaxScalerX.fit_transform(X)
 	return X, y
-
-# def createModel():
-# 	model = tf.keras.Sequential()
-# 	model.add(tf.keras.layers.Dense(36, input_dim=36, kernel_initializer='normal', activation=tf.nn.relu))
-# 	model.add(tf.keras.layers.Dense(20, activation='relu'))
-# 	model.add(tf.keras.layers.Dense(20, activation='relu'))
-# 	model.add(tf.keras.layers.Dense(1))
-# 	optimizer = tf.keras.optimizers.RMSprop(0.001)
-
-# 	model.compile(loss='mean_squared_error', optimizer=optimizer, metrics=['mean_squared_error', 'mean_absolute_error'])
-# 	return model
 
 
 checkpointPath = "./checkpoint/model.ckpt"

@@ -18,7 +18,9 @@ parser.add_argument('-l','--list', nargs='+', help='<Required> Set flag', requir
 args = parser.parse_args()
 
 # print(args.list)
+params = args.list
 params = [float(x) for x in args.list[0].split(' ')]
+# print(args)
 # print(params)
 graph = tf.get_default_graph()
 model = load_model('modelNew.h5')

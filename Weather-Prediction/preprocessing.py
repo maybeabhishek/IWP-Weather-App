@@ -13,6 +13,5 @@ def getXY_transformed():
   X = X.values
   y = y.values.reshape(-1,1)
   minMaxScalerX = MinMaxScaler()
-  minMaxScalerY = MinMaxScaler()
   X = minMaxScalerX.fit_transform(X)
   return X, y

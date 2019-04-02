@@ -1,44 +1,6 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css");
-.card-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 25vw;
-  overflow: auto;
-  position: relative;
-}
-
-#card {
-  -webkit-box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
-          box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  padding: 0;
-  min-height: 60vh;
-  margin: 20px;
-  border-radius: 5px;
-  position: relative;
-}
-
-#card .details {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 16px 20px;
-  color: #888;
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+.weather-wrapper {
+  margin-top: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -46,98 +8,218 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-transition: color 2s ease;
-  transition: color 2s ease;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.thunder #card .details {
-  color: #ddd;
-}
-
-#card .details .right {
-  text-align: right;
-}
-
-#card .details #date {
-  margin: 4px 0;
-}
-
-#card .details #summary {
-  font-weight: 600;
-  font-size: 22px;
-}
-
-#card .details .temp {
-  font-size: 60px;
-  line-height: 60px;
-}
-
-#card .details .temp span {
-  font-size: 18px;
-  line-height: 30px;
-  vertical-align: top;
-  margin-left: 5px;
-}
-
-.widget {
-  background-color: #dae3fd;
-  -webkit-transition: background-color 2s ease;
-  transition: background-color 2s ease;
-}
-
-.thunder .widget {
-  background-color: #9fa4ad;
-}
-
-.rain .widget {
-  background-color: #d8d8d8;
-}
-
-.sun .widget {
-  background-color: #ccccff;
-}
-
-.widget #inner {
+.weather-card {
+  margin: 20px 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 240px;
+  height: 240px;
   background-color: white;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, rgba(255, 255, 255, 0.5)), to(rgba(255, 255, 255, 0)));
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+  -webkit-box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+          box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  -webkit-animation: appear 500ms ease-out forwards;
+          animation: appear 500ms ease-out forwards;
 }
 
-.widget .cloud {
-  -webkit-transition: fill 2s ease;
-  transition: fill 2s ease;
+.weather-card h1 {
+  position: absolute;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: #B8B8B8;
+  bottom: 15%;
+  left: 35px;
+  opacity: 0;
+  -webkit-transform: translateX(100px);
+          transform: translateX(100px);
+  -webkit-animation: title-appear 500ms ease-out 500ms forwards;
+          animation: title-appear 500ms ease-out 500ms forwards;
 }
 
-.widget #cloud1 {
-  fill: #efefef;
+.weather-card p {
+  position: absolute;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 28px;
+  color: #d2d2d2;
+  bottom: 0;
+  left: 35px;
+  -webkit-animation: title-appear 1s ease-out 500ms forwards;
+          animation: title-appear 1s ease-out 500ms forwards;
 }
 
-.thunder .widget #cloud1 {
-  fill: #9fa4ad;
+.weather-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  float: right;
+  margin: 40px 40px 0 0;
+  -webkit-animation: weather-icon-move 5s ease-in-out infinite;
+          animation: weather-icon-move 5s ease-in-out infinite;
 }
 
-.widget #cloud2 {
-  fill: #e6e6e6;
+.sun {
+  background: #FFCD41;
+  border-radius: 50%;
+  -webkit-box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
+          box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
+  -webkit-animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
+          animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
 }
 
-.thunder .widget #cloud2 {
-  fill: #8b8e98;
+@-webkit-keyframes light {
+  from {
+    -webkit-box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
+            box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
+  }
+  to {
+    -webkit-box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+            box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+  }
 }
 
-.widget #cloud3 {
-  fill: #d5d5d5;
+@keyframes light {
+  from {
+    -webkit-box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
+            box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 10px;
+  }
+  to {
+    -webkit-box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+            box-shadow: rgba(255, 255, 0, 0.2) 0 0 0 17px;
+  }
 }
 
-.thunder .widget #cloud3 {
-  fill: #7b7988;
+.cloud {
+  margin-right: 60px;
+  background: #b6cede;
+  border-radius: 20px;
+  width: 25px;
+  height: 25px;
+  -webkit-box-shadow: #b6cede 24px -6px 0 2px, #b6cede 10px 5px 0 5px, #b6cede 30px 5px 0 2px, #b6cede 11px -8px 0 -3px, #b6cede 25px 11px 0 -1px;
+          box-shadow: #b6cede 24px -6px 0 2px, #b6cede 10px 5px 0 5px, #b6cede 30px 5px 0 2px, #b6cede 11px -8px 0 -3px, #b6cede 25px 11px 0 -1px;
 }
 
-#outer,
-#back {
-  position: fixed;
-  pointer-events: none;
+.cloud:after {
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  background-color: transparent;
+  width: 4px;
+  height: 12px;
+  left: 0;
+  top: 31px;
+  -webkit-transform: rotate(30deg);
+          transform: rotate(30deg);
+  -webkit-animation: rain 800ms ease-in-out infinite alternate;
+          animation: rain 800ms ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes rain {
+  from {
+    -webkit-box-shadow: #2092A9 8px 0px, #2092A9 32px -6px, #2092A9 20px 0px;
+            box-shadow: #2092A9 8px 0px, #2092A9 32px -6px, #2092A9 20px 0px;
+  }
+  to {
+    -webkit-box-shadow: #2092A9 8px 6px, #2092A9 32px 0px, #2092A9 20px 6px;
+            box-shadow: #2092A9 8px 6px, #2092A9 32px 0px, #2092A9 20px 6px;
+  }
+}
+
+@keyframes rain {
+  from {
+    -webkit-box-shadow: #2092A9 8px 0px, #2092A9 32px -6px, #2092A9 20px 0px;
+            box-shadow: #2092A9 8px 0px, #2092A9 32px -6px, #2092A9 20px 0px;
+  }
+  to {
+    -webkit-box-shadow: #2092A9 8px 6px, #2092A9 32px 0px, #2092A9 20px 6px;
+            box-shadow: #2092A9 8px 6px, #2092A9 32px 0px, #2092A9 20px 6px;
+  }
+}
+
+@-webkit-keyframes weather-icon-move {
+  50% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+  }
+}
+
+@keyframes weather-icon-move {
+  50% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+  }
+}
+
+@-webkit-keyframes appear {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+  }
+  75% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes appear {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1.05);
+            transform: scale(1.05);
+  }
+  75% {
+    -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes title-appear {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(150px);
+            transform: translateX(150px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+}
+
+@keyframes title-appear {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(150px);
+            transform: translateX(150px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
 }
 /*# sourceMappingURL=widget.css.map */

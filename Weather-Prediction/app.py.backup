@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 from model import createModel
 from time import sleep
-from flask import Flask, request, jsonify, Blueprint
+from flask import Flask, request, jsonify
 from time import sleep
 import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
@@ -21,10 +21,6 @@ app = Flask(__name__, static_url_path='')
 graph = tf.get_default_graph()
 model = None
 
-bp = Blueprint('auth', __name__, url_prefix='/')
-@bp.before_app_request
-def beforeRequest():
-	print("BEFORE REQUEST")
 
 def get_model_api():
 	global model
@@ -51,7 +47,7 @@ def init():
 	val = modelApi(inputArr)
 	print(val)
 
-app.register_blueprint(bp)
+
 
 @app.route('/<path:filename>')
 def serve_static(filename):
@@ -110,7 +106,7 @@ def renderPredict():
 	with graph.as_default():
 			preds = model.predict(newInput)
 	# modelApi(newInput)
-	print('preds:', preds)
+	print(preds)
 	# print(val)
 	return "Hello"
 

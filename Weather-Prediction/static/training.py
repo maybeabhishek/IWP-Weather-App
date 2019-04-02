@@ -64,13 +64,13 @@ class PrintDot(tf.keras.callbacks.Callback):
 	def on_epoch_end(self, epoch, logs):
 		print("Epoch: {} of {}".format(epoch, EPOCHS))
 
-# cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpointPath, verbose=1)
+cp_callback = tf.keras.callbacks.ModelCheckpoint(checkpointPath, verbose=1)
 early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=100)
 
 history = regressor.fit(
 	X_train, y_train,
 	epochs=EPOCHS, validation_split=0.2, verbose=0,
-	callbacks=[PrintDot(), early_stop])
+	callbacks=[PrintDot(), cp_callback, early_stop])
 
 hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch

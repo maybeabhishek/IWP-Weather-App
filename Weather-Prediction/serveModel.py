@@ -3,60 +3,18 @@
 # Imports
 # =======
 import os
-import pandas as pd
-import numpy as np
-import tensorflow as tf
-from model import createModel
+# import pandas as pd
+# import numpy as np
+# import tensorflow as tf
+# from model import createModel
 from time import sleep
 from flask import Flask, request, jsonify, Blueprint
 from time import sleep
-import tensorflow as tf
-from sklearn.preprocessing import MinMaxScaler
-from tensorflow.keras.models import load_model
-from flask import send_from_directory
+# from sklearn.preprocessing import MinMaxScaler
+# from tensorflow.keras.models import load_model
+from subprocess import Popen, PIPE
 
-
-
-app = Flask(__name__, static_url_path='')
-graph = tf.get_default_graph()
-model = None
-
-bp = Blueprint('auth', __name__, url_prefix='/')
-@bp.before_app_request
-def beforeRequest():
-	print("BEFORE REQUEST")
-
-def get_model_api():
-	global model
-	# tf.logging.set_verbosity(tf.logging.FATAL)
-	if os.path.isfile("./modelNew.h5"):
-		graph = tf.get_default_graph()
-		model = load_model('modelNew.h5')
-	else:
-		print("Error: Model not found!\nRun training.py")
-	model.build()
-
-	def model_api(input_data):
-		with graph.as_default():
-			preds = model.predict(input_data)
-		return preds
-	return model_api
-
-modelApi = get_model_api()
-
-
-def init():
-	global inputArr
-	inputArr = np.array([[1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6]])
-	val = modelApi(inputArr)
-	print(val)
-
-app.register_blueprint(bp)
-
-@app.route('/<path:filename>')
-def serve_static(filename):
-    root_dir = os.path.dirname(os.getcwd())
-    return send_from_directory(os.path.join(root_dir, 'static'), filename)
+app = Flask(__name__)
 
 @app.route("/", methods=["POST", "GET"])
 def renderPredict():
@@ -104,14 +62,13 @@ def renderPredict():
 	
 	# inputArr = np.array([[1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6]])
 	# inputArr = X[0]
-	newInput = np.array([[1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6]])
-	print(newInput)
-	print(newInput.shape)
-	with graph.as_default():
-			preds = model.predict(newInput)
-	# modelApi(newInput)
-	print('preds:', preds)
-	# print(val)
+	p = Popen(['./testing.py', '-l1 2 3 4 5 6 7 8 9 9 1 2 3 4 5 6 7 8 9 9 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6'], stdout=PIPE, stderr=PIPE)
+	newInput, err = p.communicate("")
+	# newInput = subprocess.call(["", '-l', ''])
+	# newInput = os.execl("testing.py", [1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6])
+	print('preds', newInput)
+	
+	
 	return "Hello"
 
 # @app.route("/", defaults={'path':''})
@@ -120,12 +77,7 @@ def renderPredict():
 # 	return "404 Not Found!"
 
 if __name__ == "__main__":
-		newInput = np.array([[1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,9,1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6]])
-		print(newInput)
-		print(newInput.shape)
-		with graph.as_default():
-			preds = model.predict(newInput)
-		print(preds)
+		
 		print(("* Loading Keras model and Flask starting server...\nplease wait until server has fully started"))
-		init()
+		
 		app.run(debug=True, threaded=True, port=5000)

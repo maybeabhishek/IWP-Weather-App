@@ -29,7 +29,10 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<input class="form-control" type="text" placeholder="City" id="city-name">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="City" id="city-name">
+				</div>
+				<div id="cityAddResponse"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -42,9 +45,13 @@
 <script>
 	function addCity() {
 		$.post({
-			url:"/user/city/add/"+document.getElementById('city-name').value,
-			success:function(data){
+			url: "/user/city/add/" + document.getElementById('city-name').value,
+			success: function (data) {
 				console.log(data);
+				// if (/error/i.exec(data))
+				document.getElementById("cityAddResponse").innerText = data;
+				// else
+				// document.getElementById("cityAddResponse").innerT = '<div class="alert alert-success>' + data + '</div>';
 			}
 		})
 	}

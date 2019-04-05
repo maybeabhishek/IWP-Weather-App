@@ -65,6 +65,8 @@ router.get("/profile", function (req, res) {
 })
 
 router.get("/prediction", function (req, res) {
-	res.render("prediction.ejs");
+	dates = ['06/04/19','07/04/19','08/04/19']
+	temp = ['22','24','26']
+	res.render("prediction.ejs",{dates:dates, temp:temp});
 });
 module.exports = router;

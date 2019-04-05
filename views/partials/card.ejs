@@ -1,15 +1,58 @@
 <div class="weather-wrapper">
-    <div class="weather-card">
-        <div class="weather-icon sun"></div>
-        <h1>26º</h1>
-        <p>Madrid</p>
-    </div>
-    <div class="weather-card">
-        <div class="weather-icon cloud"></div>
-        <h1>14º</h1>
-        <p>London</p>
-    </div>
+	<div class="weather-card">
+		<div class="weather-icon sun"></div>
+		<h1>26º</h1>
+		<p>Madrid</p>
+	</div>
+	<!-- <div class="weather-card">
+		<div class="weather-icon cloud"></div>
+		<h1>14º</h1>
+		<p>London</p>
+	</div> -->
+	<div class="weather-add-button" data-toggle="modal" data-target="#exampleModal">
+		<div class="text-container">
+			<h1>&plus;<br>Add</h1>
+		</div>
+	</div>
+
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Enter your city</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="City" id="city-name">
+				</div>
+				<div id="cityAddResponse"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="addCity()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-
+<script>
+	function addCity() {
+		$.post({
+			url: "/user/city/add/" + document.getElementById('city-name').value,
+			success: function (data) {
+				console.log(data);
+				// if (/error/i.exec(data))
+				document.getElementById("cityAddResponse").innerText = data;
+				// else
+				// document.getElementById("cityAddResponse").innerT = '<div class="alert alert-success>' + data + '</div>';
+			}
+		})
+	}
+</script>

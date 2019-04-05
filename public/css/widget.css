@@ -56,6 +56,45 @@
           animation: title-appear 1s ease-out 500ms forwards;
 }
 
+.weather-add-button {
+  margin: 20px 5px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  width: 240px;
+  height: 240px;
+  -webkit-box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+          box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+  -webkit-animation: appear 500ms ease-out forwards;
+          animation: appear 500ms ease-out forwards;
+  border: 5px dashed #B8B8B8;
+  text-align: center;
+}
+
+.weather-add-button .text-container {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.weather-add-button .text-container h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  color: #C8DAE6;
+  opacity: 0;
+  -webkit-animation: title-appear 500ms ease-out 500ms forwards;
+          animation: title-appear 500ms ease-out 500ms forwards;
+}
+
+.weather-add-button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  cursor: pointer;
+}
+
 .weather-icon {
   position: relative;
   width: 50px;

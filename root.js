@@ -1,8 +1,8 @@
 var router = require("express").Router();
 var User = require('./models/user');
 var passport = require('passport');
-var request = require("request");
-
+const request = require('request');
+const data = require('./recieveData.js');
 
 router.get("/", function (req, res) {
 	if (req.user) {
@@ -54,7 +54,10 @@ router.get("/register", function (req, res) {
 })
 
 router.post("/register", function (req, res) {
-	User.register(new User({ username: req.body.username, email: req.body.email }), req.body.pass, function (err, user) {
+	User.register(new User({
+		username: req.body.username,
+		email: req.body.email
+	}), req.body.pass, function (err, user) {
 		if (err) {
 			console.log(err)
 			return res.redirect("/register");
@@ -76,6 +79,7 @@ router.post("/user/city/add/:cityname", function (req, res) {
 		return res.send("Error: Need to login to add city!")
 	User.findById(req.user._id, async function (err, user) {
 		if (err) console.log(err);
+<<<<<<< HEAD
 		await User.findByIdAndUpdate(req.user._id, { $addToSet: { cities: req.params.cityname } }).catch((err) => { console.log(err) });
 		console.log(req.user.cities);
 		return res.send("Successfully Added City!");
@@ -115,12 +119,50 @@ router.get("/api/forecast/daily/:city", function (req, res) {
 // 	});
 
 // })
+=======
+		await User.findOneAndUpdate({
+			_id: req.user._id
+		}, {
+			$addToSet: {
+				cities: req.params.cityname
+			}
+		}).catch((err) => {
+			console.log(err)
+		});
+		return "Successfully Added City!";
+	});
+});
+
+
+
+>>>>>>> 91ab359906c01b4c1316457177390699ce246b61
 
 router.get("/profile", function (req, res) {
 	res.render("profile.ejs");
 })
 
-router.get("/prediction", function (req, res) {
-	res.render("prediction.ejs");
+
+router.get("/prediction", async function (req, res) {
+	var temp = []
+
+	request.post('http://localhost:5000', {
+		json: {
+			data: '22'
+		}
+	}, (error, res, body) => {
+		if (error) {
+			console.error(error)
+			return
+		}
+		console.log(body)
+		temp = body
+	})
+
+	console.log(temp)
+	dates = ['06/04/19', '07/04/19', '08/04/19']
+	res.render("prediction.ejs", {
+		dates: dates,
+		temp: body
+	});
 });
 module.exports = router;

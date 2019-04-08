@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
-
+@import url('https://fonts.googleapis.com/css?family=Roboto Mono');
 //map
 html,
 body {
@@ -110,32 +110,12 @@ body {
 	// margin-bottom:10px;
 }
 
-
-
-
-
-
-
-
-// .landing {
-//   .imageMap {
-//     border: 1px solid red;
-//     overflow: hidden;
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-
-//   .leftCol,
-//   .rightCol {
-//     border: 1px solid red;
-//   }
-
-//   .popularCities {
-//     ul {
-//       li {
-//         list-style: none;
-//         margin-left: -40px;
-//       }
-//     }
-//   }
-// }
+.footer{
+  background-color: #212121;
+  height: 20vh;
+  p{
+    font-family: "Roboto Mono";
+    padding-top:70px;
+    color:white;
+  }
+}

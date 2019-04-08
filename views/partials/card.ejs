@@ -1,11 +1,12 @@
 <div class="weather-wrapper">
 	<% cities.forEach((city)=>{ %>
-		<div class="weather-card">
-			<div class="weather-icon"><img src="http://openweathermap.org/img/w/<%= city.description %>.png" ></div>
-			<h1><%= city.temp%></h1>
-			<p><%= city.name %></p>
-			<div class="trash-icon" onclick="deleteCity('<%=city.name%>')"><i class="fa fa-trash text-danger" aria-hidden="true"></i></div>
-		</div>
+	<div class="weather-card">
+		<div class="weather-icon"><img src="http://openweathermap.org/img/w/<%= city.description %>.png"></div>
+		<h1><%= city.temp%></h1>
+		<p><%= city.name %></p>
+		<div class="trash-icon" onclick="deleteCity('<%=city.name%>')"><i class="fa fa-trash text-danger"
+				aria-hidden="true"></i></div>
+	</div>
 	<% });%>
 	<!-- <div class="weather-card">
 		<div class="weather-icon cloud"></div>
@@ -25,27 +26,30 @@
 	aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
+			<!-- <%= cities.length %> -->
+			<% if(cities.length <4){ %>
 			<div class="modal-header">
-				<!-- <%= cities.length %> -->
-				<% if(cities.length <4){ %>
-					<h5 class="modal-title" id="exampleModalLabel">Enter your city</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<div class="modal-body">
-						<div class="form-group">
-							<input class="form-control" type="text" placeholder="City" id="city-name">
-						</div>
-						<div id="cityAddResponse"></div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload()">Close</button>
-						<button type="button" class="btn btn-primary" onclick="addCity()">Save changes</button>
-					</div>
-				<% } else {%>
-					<h3>You can only add maximum of 4 cities!</h3>
-				<% }; %>
+				<h5 class="modal-title" id="exampleModalLabel">Enter your city</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input class="form-control" type="text" placeholder="City" id="city-name">
+				</div>
+				<div id="cityAddResponse"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"
+					onclick="window.location.reload()">Close</button>
+				<button type="button" class="btn btn-primary" onclick="addCity()">Save changes</button>
+			</div>
+			<% } else {%>
+			<div class="modal-body">
+				<h3>You can only add maximum of 4 cities!</h3>
+			</div>
+			<% }; %>
 		</div>
 	</div>
 </div>
@@ -64,13 +68,13 @@
 		})
 	}
 
-	function deleteCity(cityName){
+	function deleteCity(cityName) {
 		var confirmAns = confirm("Confirm Delete Action?");
-		if(confirmAns){
+		if (confirmAns) {
 			$.post({
-				url: "/user/city/remove/"+cityName,
-				success: function(data){
-					if(/error/i.exec(data))
+				url: "/user/city/remove/" + cityName,
+				success: function (data) {
+					if (/error/i.exec(data))
 						alert(data);
 					else
 						window.location.reload();

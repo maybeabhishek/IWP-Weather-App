@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
+@import url("https://fonts.googleapis.com/css?family=Roboto Mono");
 html,
 body {
   height: 100%;
@@ -76,5 +77,16 @@ body .container .row-container .map {
   width: 100vw;
   height: 10px;
   background-color: white;
+}
+
+.footer {
+  background-color: #212121;
+  height: 20vh;
+}
+
+.footer p {
+  font-family: "Roboto Mono";
+  padding-top: 70px;
+  color: white;
 }
 /*# sourceMappingURL=home.css.map */

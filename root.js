@@ -79,7 +79,6 @@ router.post("/user/city/add/:cityname", function (req, res) {
 		return res.send("Error: Need to login to add city!")
 	User.findById(req.user._id, async function (err, user) {
 		if (err) console.log(err);
-<<<<<<< HEAD
 		await User.findByIdAndUpdate(req.user._id, { $addToSet: { cities: req.params.cityname } }).catch((err) => { console.log(err) });
 		console.log(req.user.cities);
 		return res.send("Successfully Added City!");
@@ -119,23 +118,6 @@ router.get("/api/forecast/daily/:city", function (req, res) {
 // 	});
 
 // })
-=======
-		await User.findOneAndUpdate({
-			_id: req.user._id
-		}, {
-			$addToSet: {
-				cities: req.params.cityname
-			}
-		}).catch((err) => {
-			console.log(err)
-		});
-		return "Successfully Added City!";
-	});
-});
-
-
-
->>>>>>> 91ab359906c01b4c1316457177390699ce246b61
 
 router.get("/profile", function (req, res) {
 	res.render("profile.ejs");

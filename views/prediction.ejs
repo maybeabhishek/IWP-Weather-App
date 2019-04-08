@@ -13,30 +13,30 @@
 <body class="bg-white">
   <% include partials/navbar %>
   <div class="container mt-4">
-    <h1>Weather Forecast</h1>
+    <h1>Weather Forecast | <small>Jaipur</small></h1>
     <hr>
     <div class="card-deck">
       <div class="card text-white bg-dark">
-        <div class="card-header">Today | <span class="text text-info"> <%=dates[0]%></span></div>
+        <div class="card-header">Today | <span class="text text-info"> <%=data[0].date%></span></div>
         <div class="card-body">
           <h5 class="card-title text-warning">Temperature: </h5>
-          <h1 class="card-text"><%=temp%><sup>o</sup><span class="">C</span></h1>
+          <h1 class="card-text"><%=data[0].prediction%><sup>o</sup><span class="">C</span></h1>
 
         </div>
       </div>
       <div class="card text-white bg-dark">
-        <div class="card-header">Tommorow | <span class="text text-info"> <%=dates[1]%></div>
+        <div class="card-header">Tommorow | <span class="text text-info"> <%=data[1].date%></div>
         <div class="card-body">
           <h5 class="card-title text-warning">Temperature: </h5>
-          <h1 class="card-text"><%=temp%><sup>o</sup><span class="">C</span></h1>
+          <h1 class="card-text"><%=data[1].prediction%><sup>o</sup><span class="">C</span></h1>
 
         </div>
       </div>
       <div class="card text-white bg-dark">
-        <div class="card-header">Day After | <span class="text text-info"> <%=dates[2]%></div>
+        <div class="card-header">Day After | <span class="text text-info"><%=data[2].date%></div>
         <div class="card-body">
           <h5 class="card-title text-warning">Temperature: </h5>
-          <h1 class="card-text"><%=temp%><sup>o</sup><span class="">C</span></h1>
+          <h1 class="card-text"><%=data[2].prediction%><sup>o</sup><span class="">C</span></h1>
         </div>
       </div>
     </div>

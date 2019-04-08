@@ -3,36 +3,34 @@ var User = require('./models/user');
 var passport = require('passport');
 const request = require('request');
 const data = require('./recieveData.js');
+const requestIp = require("request-ip");
 
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
+	const clientIp = requestIp.getClientIp(req); 
+	console.log("IP:", clientIp);
+	var data = [];
+	
+	
 	if (req.user) {
 		console.log(req.user.cities);
-		let promise1 = new Promise((resolve, reject) => {
-			var data = [];
-			new Promise((resolve, reject)=>{
-				request("http://localhost:3000/api/forecast/current/delhi", function(err, resp, body){
-					resolve(body);
-				});
-			})
-			.then((body)=>{
-				console.log("New Promise: ", body);
-				data.push(body);
-				console.log("Data");
-				resolve(data);
+
+		
+		const getCityDetails = city => new Promise((resolve, reject) => {
+			request("http://localhost:3000/api/forecast/current/" + city, function (err, response, body) {
+			
+				data.push({"name": JSON.parse(body).name,"temp": Math.round(JSON.parse(body).main.temp*10)/10, "description":JSON.parse(body).weather[0].icon});
+				return resolve();
 			});
 		});
-
-		promise1.then((body) => {
-			console.log(body);
-			res.render("index.ejs");
-		})
-		.catch((err)=>{
-			console.log(err);
-		})
-	} else {
-		console.log("Render");
-		res.render("index.ejs");
-	}
+		await (async function loop() {
+			for (let i = 0; i < req.user.cities.length; i++) {
+				await getCityDetails(req.user.cities[i]);
+			}
+		})();
+		console.log("Data: ", data);
+	} 
+	
+	return res.render("index.ejs", {cities: data});
 });
 
 //Login Routes
@@ -85,6 +83,17 @@ router.post("/user/city/add/:cityname", function (req, res) {
 	});
 });
 
+router.post("/user/city/remove/:cityname", function (req, res) {
+	if (!req.isAuthenticated())
+		return res.send("Error: Need to login to add city!")
+	User.findById(req.user._id, async function (err, user) {
+		if (err) console.log(err);
+		await User.findByIdAndUpdate(req.user._id, { $pull: { cities: req.params.cityname } }).catch((err) => { console.log(err) });
+		console.log(req.user.cities);
+		return res.send("Successfully Removed City!");
+	});
+});
+
 router.get("/api/forecast/current/:city", function (req, res) {
 	// console.log(req.params.city);
 	var input = req.params.city;
@@ -125,26 +134,13 @@ router.get("/profile", function (req, res) {
 
 
 router.get("/prediction", async function (req, res) {
-	var temp = []
-
-	request.post('http://localhost:5000', {
-		json: {
-			data: '22'
-		}
-	}, (error, res, body) => {
-		if (error) {
-			console.error(error)
-			return
-		}
-		console.log(body)
-		temp = body
-	})
-
-	console.log(temp)
-	dates = ['06/04/19', '07/04/19', '08/04/19']
-	res.render("prediction.ejs", {
-		dates: dates,
-		temp: body
+	var data=[];
+	
+	request("http://localhost:5000", function(err, resp, body){
+		if(err) console.log(err);
+		console.log(body);
+		// res.send(body)
+		res.render("prediction.ejs", {data:JSON.parse(body)});
 	});
 });
 module.exports = router;

@@ -1,11 +1,38 @@
 var router = require("express").Router();
 var User = require('./models/user');
 var passport = require('passport');
-
+var request = require("request");
 
 
 router.get("/", function (req, res) {
-	res.render("index.ejs");
+	if (req.user) {
+		console.log(req.user.cities);
+		let promise1 = new Promise((resolve, reject) => {
+			var data = [];
+			new Promise((resolve, reject)=>{
+				request("http://localhost:3000/api/forecast/current/delhi", function(err, resp, body){
+					resolve(body);
+				});
+			})
+			.then((body)=>{
+				console.log("New Promise: ", body);
+				data.push(body);
+				console.log("Data");
+				resolve(data);
+			});
+		});
+
+		promise1.then((body) => {
+			console.log(body);
+			res.render("index.ejs");
+		})
+		.catch((err)=>{
+			console.log(err);
+		})
+	} else {
+		console.log("Render");
+		res.render("index.ejs");
+	}
 });
 
 //Login Routes
@@ -48,12 +75,31 @@ router.post("/user/city/add/:cityname", function (req, res) {
 	if (!req.isAuthenticated())
 		return res.send("Error: Need to login to add city!")
 	User.findById(req.user._id, async function (err, user) {
-		if(err) console.log(err);
-		await User.findOneAndUpdate({ _id: req.user._id }, { $addToSet: { cities: req.params.cityname } }).catch((err)=>{console.log(err)});
-		return "Successfully Added City!";
+		if (err) console.log(err);
+		await User.findByIdAndUpdate(req.user._id, { $addToSet: { cities: req.params.cityname } }).catch((err) => { console.log(err) });
+		console.log(req.user.cities);
+		return res.send("Successfully Added City!");
 	});
 });
 
+router.get("/api/forecast/current/:city", function (req, res) {
+	// console.log(req.params.city);
+	var input = req.params.city;
+	request("https://api.openweathermap.org/data/2.5/weather?q=" + input + "&appid=58b6f7c78582bffab3936dac99c31b25&units=metric", function (err, response, body) {
+		// console.log(response.body);
+		return res.send(response.body);
+	});
+});
+
+router.get("/api/forecast/daily/:city", function (req, res) {
+	var appid = '58b6f7c78582bffab3936dac99c31b25';
+	console.log(req.params.city);
+	var input = req.params.city;
+	request("https://api.openweathermap.org/data/2.5/forecast/daily?q=" + input + "&appid=58b6f7c78582bffab3936dac99c31b25&units=metric&cnt=6", function (err, response, body) {
+		// console.log(response);
+		return res.send(response.body);
+	});
+});
 // router.post("/register/user", function (req, res) {
 // 	var userData = {
 // 		email: req.body.email,

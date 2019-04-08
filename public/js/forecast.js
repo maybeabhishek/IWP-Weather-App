@@ -63,28 +63,16 @@ $(function() {
 
   // Function go get weather details from openweather
   function getWeather(input) {
-    var appid = '58b6f7c78582bffab3936dac99c31b25';
     // Current Weather
     var requestWeather = $.ajax({
       dataType: 'json',
-      url: '//api.openweathermap.org/data/2.5/weather',
-      data: {
-        q: input,
-        units: 'metric',
-        appid: appid
-      }
+      url: '/api/forecast/current/'+input
     });
 
     // Daily forecast
     var requestForecast = $.ajax({
       dataType: 'json',
-      url: '//api.openweathermap.org/data/2.5/forecast/daily',
-      data: {
-        q: input,
-        units: 'metric',
-        cnt: '6',
-        appid: appid
-      }
+      url: '/api/forecast/daily/'+input,
     });
 
     // Change classes
@@ -95,7 +83,7 @@ $(function() {
 
     // Query is taken
     requestWeather.done(function(data) {
-      console.log("Forecast: ", data);
+      console.log("Weather: ", data);
 
       var weather = document.getElementById('weather');
       if (data.code === '404') {
@@ -122,13 +110,13 @@ $(function() {
       function toCelsius() {
         $(this).addClass('active').removeAttr('href');
         $fahrenheit.removeClass('active').attr('href', '#');
-        $tempNumber.html(Math.round((data.main.temp - 32) * (5 / 9)));
+        $tempNumber.html(Math.round(data.main.temp));
       }
-
+      
       function toFahrenheit() {
         $(this).addClass('active').removeAttr('href');
         $celsius.removeClass('active').attr("href", '#');
-        $tempNumber.html(Math.round(data.main.temp));
+        $tempNumber.html(Math.round((data.main.temp + 32) * (9 / 5)));
       }
 
       // https://openweathermap.org/weather-conditions
@@ -173,10 +161,10 @@ $(function() {
       }
     });
 
-
     // Forecast is taken
     requestForecast.done(function(data) {
       // Events
+      // console.log("Forecast", data);
       $celsius.on('click', toCelsius);
       $fahrenheit.on('click', toFahrenheit);
 
@@ -187,12 +175,12 @@ $(function() {
         forecast.push({
           date: new Date(data.list[i].dt * 1000).toString().split(' ')[0],
           fahrenheit: {
-            high: Math.round(data.list[i].temp.max),
-            low: Math.round(data.list[i].temp.min),
+            high: Math.round((data.list[i].temp.max + 32) * (9 / 5)),
+            low: Math.round((data.list[i].temp.min + 32) * (9 / 5))
           },
           celsius: {
-            high: Math.round((data.list[i].temp.max - 32) * (5 / 9)),
-            low: Math.round((data.list[i].temp.min - 32) * (5 / 9))
+            high: Math.round(data.list[i].temp.max),
+            low: Math.round(data.list[i].temp.min),
           }
         });
       }
@@ -215,7 +203,7 @@ $(function() {
         $forecast.html(arr.join(''));
       }
 
-      doForecast('fahrenheit');
+      doForecast('celsius');
     });
   }
 

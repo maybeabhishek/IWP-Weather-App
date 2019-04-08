@@ -20,7 +20,7 @@ var UserSchema = new mongoose.Schema({
         type: String,
         // unique: true,
     },
-    cities: [String]
+    cities: [{type:String, lowercase:true}]
 });
 
 UserSchema.plugin(passportLocalMongoose);

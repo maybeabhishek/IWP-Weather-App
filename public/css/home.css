@@ -50,7 +50,7 @@ body .landing .heading .heading-text {
 html .landing .heading .heading-text h1,
 body .landing .heading .heading-text h1 {
   font-family: 'Lato',sans-serif;
-  font-size: 300px;
+  font-size: 21rem;
   padding-bottom: 20px;
   text-shadow: 0px 5px 45px rgba(0, 0, 0, 0.8), 5px 5px 45px rgba(0, 0, 0, 0.5), 5px 15px 45px rgba(0, 0, 0, 0.3);
 }
@@ -76,5 +76,12 @@ body .container .row-container .map {
   width: 100vw;
   height: 10px;
   background-color: white;
+}
+
+.icon {
+  width: auto;
+  height: 90px;
+  position: absolute;
+  margin-top: -45px;
 }
 /*# sourceMappingURL=home.css.map */

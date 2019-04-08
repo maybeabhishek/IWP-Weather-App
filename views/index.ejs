@@ -8,22 +8,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
 	<!-- <script src="main.js"></script> -->
-
+	<!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css"/>  -->
   <link rel="stylesheet" href="/lib/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="/css/home.css" type="text/css" />
   <link rel="stylesheet" href="/css/forecast.css" type="text/css" />
   <link rel="stylesheet" href="/css/scrollbar.css" type="text/css" />
   <link rel="stylesheet" href="/css/widget.css" type="text/css" />
-
-  <script src="/lib/jquery.min.js"></script>
-	<script src="/lib/bootstrap.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+  <script src="/lib/jquery.min.js"></script>
+  <script src="/lib/bootstrap.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script> -->
 </head>
 
 <body>
   <% include partials/navbar %>
+
   <!-- <div class="container">
 		<h1>Weather App</h1>
 		<div class="row landing">
@@ -66,6 +66,7 @@
 		</div>
 	</div> -->
 	<% include partials/landing %>
+	<div class="main-body">
 	<div class="seperation"></div>
 	<% include partials/card %>
 	<div class="seperation"></div>
@@ -73,11 +74,11 @@
 
 
 	<% include partials/footer %>
-
+	</div>
 	<!-- Scripts -->
 	<script src="/lib/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script> -->
 	<script src="/lib/bootstrap.js"></script>
 	<script src="/js/forecast.js"></script>
 	<script src="/js/getMap.js"></script>

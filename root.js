@@ -34,13 +34,15 @@ router.get("/", async function (req, res) {
 });
 
 //Login Routes
-router.get("/login", function (req, res) {
-	res.render("login.ejs");
+router.get("/login",function (req, res) {
+	var message = req.query.err;
+	res.render("login.ejs",{message: message});
 })
 
 router.post("/login", passport.authenticate("local", {
 	successRedirect: "/",
-	failureRedirect: "/login"
+	failureRedirect: "/login?err=Invalid Username or Password",
+	failureFlash: 'Invalid Username or Password',
 }), function (req, res) {
 	return res.send("Hello");
 })

@@ -20,17 +20,23 @@
             <div class="form-container">
                 <div class="form-group">
                     <div class="mb-2">Username</div>
-                    <input class="form-control" type="text" name = "username"placeholder="Enter user name">
+                    <input class="form-control" type="text" name="username" placeholder="Enter user name">
                 </div>
                 <div class="form-group">
                     <div class="mt-2 mb-2">Password</div>
-                    <input class="form-control" type="password" name = "password"placeholder="Enter password">
+                    <input class="form-control" type="password" name="password" placeholder="Enter password">
                 </div>
                 <div class="form-group mt-4">
                     <input class="btn btn-success" type="submit" value="Login">
                 </div>
+                <%if(message){%>
+                <div class="alert alert-danger message" role="alert">
+                    <%=message%>
+                </div>
+                <%}%>
             </div>
         </form>
+
     </div>
 </body>
 

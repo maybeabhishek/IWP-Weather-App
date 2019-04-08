@@ -8,6 +8,7 @@ var passport = require('passport');
 var rootRoute = require('./root.js');
 var User = require('./models/user')
 var LocalStrategy = require('passport-local');
+var flash = require('connect-flash');
 passportLocalMongoose = require("passport-local-mongoose");
 
 
@@ -17,7 +18,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 var app = express();
-
+app.use(flash());
 app.use(require('express-session')({
   secret: "Data ata data dataata",
   resave: false,

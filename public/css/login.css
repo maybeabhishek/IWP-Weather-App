@@ -17,4 +17,9 @@ h1 {
 .form-container .text {
   margin: auto 380px;
 }
+
+.form-container .message {
+  width: 20vw;
+  margin: 20px 380px;
+}
 /*# sourceMappingURL=login.css.map */
